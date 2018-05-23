@@ -1,161 +1,156 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-	body {
-		
-		font-size: 20px;
-	}
+    body {       
+        font-size: 20px;
+    }
 
-	#title {
-		text-align: center;
-		margin-bottom: 50px;
-	}
+    #title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
 
-	#body {
-	}
+    #body {
+    }
 
-	#wrapper {
-		padding: 20px 150px 150px 150px;
-		margin: 50px 150px;
-		border: 2px solid black;
-	}
+    #wrapper {
+        padding: 20px 150px 150px 150px;
+        margin: 50px 150px;
+        border: 2px solid black;
+    }
 </style>
 <head>
-	<title>CBM</title>
+    <title>CBM</title>
 </head>
 <body>
+    <div id="wrapper">
+        <div id="title">
+            Select nice picture.
+        </div>
 
-	<div id="wrapper">
-		<div id="title">
-			Select nice picture.
-		</div>
+        <div id="body" align=center>
+            <p id="img"></p>
+            <p id="clock">Time elapsed: </p>
+            <p id="correct">Correct guesses: 0</p>
+            <p id="incorrect">Incorrect guesses: 0</p>
+            <p id="ratio">Ratio: Nan</p>
 
-		<div id="body" align=center>
-			<p id="img"></p>
-			<p id="clock">Time elapsed: </p>
-			<p id="correct">Correct guesses: 0</p>
-			<p id="incorrect">Incorrect guesses: 0</p>
-			<p id="ratio">Ratio: Nan</p>
-
-			 <form name="option_form" method="post">
-			Imagecount: <input type="text" name="imagecount" value="3">
-			<br>
-			Imagesize: <input type="text" name="imagesize" value="200">
-			<br>
-			<input id="commit-button" type="button" value="Commit">
-			</form>
-		</div>
-		
-	</div>
+             <form name="option_form" method="post">
+            Imagecount: <input type="text" name="imagecount" value="3">
+            <br>
+            Imagesize: <input type="text" name="imagesize" value="200">
+            <br>
+            <input id="commit-button" type="button" value="Commit">
+            </form>
+        </div>
+    </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="data.json"></script>
 
 <script type="text/javascript">
 (function () { //closure
-   // code
+    // code
     $('#commit-button').click(function validateForm() {
-      count = parseInt(document.forms["option_form"]["imagecount"].value);
-		size = parseInt(document.forms["option_form"]["imagesize"].value);
-		if (count > 1 && count < 5) {
-			imagecount = count;
-		} else {
-			document.forms["option_form"]["imagecount"].value = 3;
-			imagecount = 3;
-		}
+        count = parseInt(document.forms["option_form"]["imagecount"].value);
+        size = parseInt(document.forms["option_form"]["imagesize"].value);
+        if (count > 1 && count < 5) {
+            imagecount = count;
+        } else {
+            document.forms["option_form"]["imagecount"].value = 3;
+            imagecount = 3;
+        }
 
-		if (size > 150 && size < 250) {
-			height = size;
-		} else {
-			document.forms["option_form"]["imagesize"].value = 200;
-			height = 200;
-		}
+        if (size > 150 && size < 250) {
+            height = size;
+        } else {
+            document.forms["option_form"]["imagesize"].value = 200;
+            height = 200;
+        }
 
-		drawImages();
+        drawImages();
     });
 
-	// url_happy & url_unhappy are stored in a json file under a variable "data".
-   // data contains a dict that contains two words that separate url lists.
-   // Url-lists are such as: ["url1.jpg", "url2.jpg", ...]
-   // TODO: figure out open-source-sources to fill them automatically
+    // url_happy & url_unhappy are stored in a json file under a variable "data".
+    // data contains a dict that contains two words that separate url lists.
+    // Url-lists are such as: ["url1.jpg", "url2.jpg", ...]
+    // TODO: figure out open-source-sources to fill them automatically
    
-	var timepassed = 0
-	var correctguess = 0
-	var incorrectguess = 0
-	imagecount = 3
-	height = 200
-	setInterval(function() {myTimer()}, 1000);
-	drawImages();
-   
-	function drawImages(){
-		// jquery      
-		url_happy = data["url_happy"];
-		url_unhappy = data["url_unhappy"];
+    var timepassed = 0
+    var correctguess = 0
+    var incorrectguess = 0
+    imagecount = 3
+    height = 200
+    setInterval(function() {myTimer()}, 1000);
+    drawImages();
 
-		numhappy = url_happy.length;
-		numunhappy = url_unhappy.length;
+    function drawImages(){
+        // jquery      
+        url_happy = data["url_happy"];
+        url_unhappy = data["url_unhappy"];
 
-		var happyrow = Math.floor(Math.random() * imagecount); 
-		var happycol = Math.floor(Math.random() * imagecount);
+        numhappy = url_happy.length;
+        numunhappy = url_unhappy.length;
 
-		var imagepath = "";
-		var happyindex, imgrow, img, imgel;
-		$('#img').empty();
-		for (j = 0; j < imagecount; j++) {
-			imgrow = $('<div class="imgrow"></div>');
-			for (i = 0; i < imagecount; i++) {
-				if (i==happyrow && j==happycol) {
-					happyindex = Math.floor(Math.random() * numhappy);
-					img = url_happy[happyindex];
-					imgel = $("<img height=" + height + " src='" + img + "'>"); //width=" + 0.75*height +"
-					imgel.click(function () {
-						processResult(true);
-					});
-				}
-				else {
-					unhappyindex = Math.floor(Math.random() * numunhappy)
-					img = url_unhappy[unhappyindex];
-					imgel = $("<img height=" + height + "  src='" + img + "'>");
-					imgel.click(function () {
-						processResult(false);
-					});
-				}
-				imgrow.append(imgel);
-			}
-			$('#img').append(imgrow);
-		}
-	}
+        var happyrow = Math.floor(Math.random() * imagecount); 
+        var happycol = Math.floor(Math.random() * imagecount);
 
-	function processResult(correct){
-		if (correct){
-			correctguess = correctguess + 1;
-		    document.getElementById("correct").innerHTML = "Correct: " + correctguess;
-			drawImages();
-		} else {
-			incorrectguess = incorrectguess + 1;
-			document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectguess;
-			alert("Incorrect!");
-		}
+        var imagepath = "";
+        var happyindex, imgrow, img, imgel;
+        $('#img').empty();
+        for (j = 0; j < imagecount; j++) {
+            imgrow = $('<div class="imgrow"></div>');
+            for (i = 0; i < imagecount; i++) {
+                if (i==happyrow && j==happycol) {
+                    happyindex = Math.floor(Math.random() * numhappy);
+                    img = url_happy[happyindex];
+                    imgel = $("<img height=" + height + " src='" + img + "'>"); //width=" + 0.75*height +"
+                    imgel.click(function () {
+                        processResult(true);
+                    });
+                }
+                else {
+                    unhappyindex = Math.floor(Math.random() * numunhappy)
+                    img = url_unhappy[unhappyindex];
+                    imgel = $("<img height=" + height + "  src='" + img + "'>");
+                    imgel.click(function () {
+                        processResult(false);
+                    });
+                }
+                imgrow.append(imgel);
+            }
+            $('#img').append(imgrow);
+        }
+    }
 
-		document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(correctguess+incorrectguess)) + "%";
-	}
+    function processResult(correct){
+        if (correct){
+            correctguess = correctguess + 1;
+            document.getElementById("correct").innerHTML = "Correct: " + correctguess;
+            drawImages();
+        } else {
+            incorrectguess = incorrectguess + 1;
+            document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectguess;
+            alert("Incorrect!");
+        }
+        document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(correctguess+incorrectguess)) + "%";
+    }
 
-	function myTimer() {
-		timepassed = timepassed + 1;
-		document.getElementById("clock").innerHTML = "Time elapsed: " + timepassed;
-	}
+    function myTimer() {
+        timepassed = timepassed + 1;
+        document.getElementById("clock").innerHTML = "Time elapsed: " + timepassed;
+    }
 
-   // TODO: fix this function to opt out of js-script data-loading
-   function loadData(filename) {
-      fr = new FileReader();
-      fr.onload = (function receivedText(e) {
-         let lines = e.target.result;
-         var newArr = JSON.parse(lines);
-      });
-      fr.readAsText(filename);
-      return JSON.parse(xmlHttp.responseText);
-   }
-
+    // TODO: fix this function to opt out of js-script data-loading
+    function loadData(filename) {
+        fr = new FileReader();
+        fr.onload = (function receivedText(e) {
+            let lines = e.target.result;
+            var newArr = JSON.parse(lines);
+        });
+        fr.readAsText(filename);
+        return JSON.parse(xmlHttp.responseText);
+    }
 }());
 </script>
 </body>
