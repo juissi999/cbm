@@ -1,11 +1,28 @@
 # cbm
-Some years ago I saw a documentary related to happiness. In the program
-psychologists used a program to display multiple faces to participants. One of
-the faces was having a happy emotion and the others were unhappy. The task was
-to find the happy face. This was called cognitive bias modification.
+Some years ago I saw a documentary related to happiness, anxiety etc.
+In the program psychologists used a program to display multiple
+faces to participants. One of the faces was having a happy emotion
+and the others were unhappy. The task was to find the happy face among
+unhappy ones. This was called Cognitive Vias Modification.
 
-Here is a simple website-program doing it with JS.
+These kind of programs were not available so one had to be made. Here is a simple
+website-program performing CBM with JavaScript.
 
-## usage
+## Demo
+https://juissi999.github.io/cbm/
+
+## What to do?
+Repeat the procedure of finding positive face.
+
+## Scientific background
+Wikipedia article:
+https://en.wikipedia.org/wiki/Cognitive_bias_modification
+
+Search scientifical articles for more detailed information.
+
+## Using with custom images
 Download and run on web-browser. Currently you need to add urls of face-images
-manually to the code.
+manually to the code. In this version adding images requires you to add images
+to happy_images/ and unhappy_images folders. After that you need to add the image
+paths to data.json following the examples there. You can also use images from the
+internet by putting the whole URL to data.json.
