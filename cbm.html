@@ -36,9 +36,9 @@
             <p id="ratio">Ratio: Nan</p>
 
              <form name="option_form" method="post">
-            Imagecount: <input type="text" name="imagecount" value="3">
+            Imagetable size [2-5]: <input type="text" name="imagecount" value="3">
             <br>
-            Imagesize: <input type="text" name="imagesize" value="200">
+            Imagesize [100-300]: <input type="text" name="imagesize" value="200">
             <br>
             <input id="commit-button" type="button" value="Commit">
             </form>
@@ -54,14 +54,14 @@
     $('#commit-button').click(function validateForm() {
         count = parseInt(document.forms["option_form"]["imagecount"].value);
         size = parseInt(document.forms["option_form"]["imagesize"].value);
-        if (count > 1 && count < 5) {
+        if (count > 1 && count < 6) {
             imagecount = count;
         } else {
             document.forms["option_form"]["imagecount"].value = 3;
             imagecount = 3;
         }
 
-        if (size > 150 && size < 250) {
+        if (size > 99 && size < 301) {
             height = size;
         } else {
             document.forms["option_form"]["imagesize"].value = 200;
@@ -85,7 +85,7 @@
     drawImages();
 
     function drawImages(){
-        // jquery      
+        // jquery
         url_happy = data["url_happy"];
         url_unhappy = data["url_unhappy"];
 
