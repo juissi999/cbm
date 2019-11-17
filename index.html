@@ -14,8 +14,8 @@
     }
 
     #wrapper {
-        padding: 20px 150px 150px 150px;
-        margin: 50px 150px;
+        padding: 20px 50px 150px 50px;
+        margin: 50px 100px;
         border: 2px solid black;
     }
 </style>
@@ -36,9 +36,9 @@
             <p id="ratio">Ratio: Nan</p>
 
              <form name="option_form" method="post">
-            Imagetable size [2-5]: <input type="text" name="imagecount" value="3">
+            Imagetable size [2-5]: <input type="text" name="imagecount" value="4">
             <br>
-            Imagesize [100-300]: <input type="text" name="imagesize" value="200">
+            Imagesize [100-300]: <input type="text" name="imagesize" value="150">
             <br>
             <input id="commit-button" type="button" value="Commit">
             </form>
@@ -51,21 +51,24 @@
 <script type="text/javascript">
 (function () { //closure
     // code
+    const default_imagecount = 4
+    const default_height = 150
+    
     $('#commit-button').click(function validateForm() {
         count = parseInt(document.forms["option_form"]["imagecount"].value);
         size = parseInt(document.forms["option_form"]["imagesize"].value);
         if (count > 1 && count < 6) {
             imagecount = count;
         } else {
-            document.forms["option_form"]["imagecount"].value = 3;
-            imagecount = 3;
+            document.forms["option_form"]["imagecount"].value = default_imagecount;
+            imagecount = default_imagecount;
         }
 
         if (size > 99 && size < 301) {
             height = size;
         } else {
-            document.forms["option_form"]["imagesize"].value = 200;
-            height = 200;
+            document.forms["option_form"]["imagesize"].value = default_height;
+            height = default_height;
         }
 
         drawImages();
@@ -78,9 +81,9 @@
    
     var timepassed = 0
     var correctguess = 0
-    var incorrectguess = 0
-    imagecount = 3
-    height = 200
+    var incorrectguess = 0    
+    imagecount = default_imagecount
+    height = default_height
     setInterval(function() {myTimer()}, 1000);
     drawImages();
 
