@@ -7,17 +7,17 @@
 
     #title {
         text-align: center;
-        margin-bottom: 50px;
+        font-size: 30px;
+        margin-bottom: 30px;
     }
 
-    .button {
-        font-size: 20px;
-        padding: 15px 32px;
+    .imgbutton, .sizebutton {
+        font-size: 27px;
     }
 
     #wrapper {
         padding: 20px 50px 150px 50px;
-        margin: 50px 100px;
+        margin: 30px 70px;
         border: 2px solid black;
     }
 </style>
@@ -27,24 +27,32 @@
 <body>
     <div id="wrapper">
         <div id="title">
-            Select nice picture.
+            Find a nice emotion.
         </div>
-
         <div id="body" align=center>
+            <form name="option_form" method="post">
+            <table><tr><td>
+                <input class="imgbutton" type="button" value="-">
+                </td><td>
+                Images
+            </td><td>
+                <input class="imgbutton" type="button" value="+">
+            </td><td>
+                <input class="sizebutton" type="button" value="-">
+            </td><td>            
+            </td><td>
+                Imagesize
+            </td><td>
+                <input class="sizebutton" type="button" value="+">
+            </td>
+            </tr>
+            </table>
+            </form>
+            <br>
             <p id="img"></p>
             <p id="clock">Time elapsed: </p>
             <p id="correct">Correct guesses: 0/0</p>
             <p id="ratio">Ratio: Nan</p>
-
-            <form name="option_form" method="post">
-            <input class="imgbutton" type="button" value="-">
-            Images
-            <input class="imgbutton" type="button" value="+">
-            <br>
-            <input class="sizebutton" type="button" value="-">
-            Imagesize
-            <input class="sizebutton" type="button" value="+">
-            </form>
         </div>
     </div>
 
