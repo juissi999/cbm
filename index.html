@@ -10,7 +10,9 @@
         margin-bottom: 50px;
     }
 
-    #body {
+    .button {
+        font-size: 20px;
+        padding: 15px 32px;
     }
 
     #wrapper {
@@ -31,16 +33,17 @@
         <div id="body" align=center>
             <p id="img"></p>
             <p id="clock">Time elapsed: </p>
-            <p id="correct">Correct guesses: 0</p>
-            <p id="incorrect">Incorrect guesses: 0</p>
+            <p id="correct">Correct guesses: 0/0</p>
             <p id="ratio">Ratio: Nan</p>
 
-             <form name="option_form" method="post">
-            Imagetable size [2-5]: <input type="text" name="imagecount" value="4">
+            <form name="option_form" method="post">
+            <input class="imgbutton" type="button" value="-">
+            Images
+            <input class="imgbutton" type="button" value="+">
             <br>
-            Imagesize [100-300]: <input type="text" name="imagesize" value="150">
-            <br>
-            <input id="commit-button" type="button" value="Commit">
+            <input class="sizebutton" type="button" value="-">
+            Imagesize
+            <input class="sizebutton" type="button" value="+">
             </form>
         </div>
     </div>
@@ -53,25 +56,41 @@
     // code
     const default_imagecount = 4
     const default_height = 150
+    var imagecount = default_imagecount
+    var height = default_height
     
-    $('#commit-button').click(function validateForm() {
-        count = parseInt(document.forms["option_form"]["imagecount"].value);
-        size = parseInt(document.forms["option_form"]["imagesize"].value);
-        if (count > 1 && count < 6) {
-            imagecount = count;
-        } else {
-            document.forms["option_form"]["imagecount"].value = default_imagecount;
-            imagecount = default_imagecount;
-        }
+    $('.imgbutton').click(function validateForm() {
+        // image count buttons pressed
 
-        if (size > 99 && size < 301) {
-            height = size;
+        var type = $(this).attr("value")
+        var newcount = imagecount
+        if (type == "+") {
+            newcount += 1 
         } else {
-            document.forms["option_form"]["imagesize"].value = default_height;
-            height = default_height;
+            newcount -= 1 
         }
+        
+        if (newcount > 1 && newcount < 6) {
+            imagecount = newcount;
+            drawImages();
+        }
+    });
 
-        drawImages();
+    $('.sizebutton').click(function validateForm() {
+        // image size buttons pressed
+
+        var type = $(this).attr("value")
+        var newsize = height
+        if (type == "+") {
+            newsize += 10
+        } else {
+            newsize -= 10
+        }
+        
+        if (newsize > 99 && newsize < 301) {
+            height = newsize;
+            drawImages();
+        }
     });
 
     // url_happy & url_unhappy are stored in a json file under a variable "data".
@@ -81,9 +100,8 @@
    
     var timepassed = 0
     var correctguess = 0
-    var incorrectguess = 0    
-    imagecount = default_imagecount
-    height = default_height
+    var totalguess = 0    
+
     setInterval(function() {myTimer()}, 1000);
     drawImages();
 
@@ -127,16 +145,16 @@
     }
 
     function processResult(correct){
+        totalguess +=1;
+
         if (correct){
             correctguess = correctguess + 1;
-            document.getElementById("correct").innerHTML = "Correct: " + correctguess;
-            drawImages();
         } else {
-            incorrectguess = incorrectguess + 1;
-            document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectguess;
             alert("Incorrect!");
         }
-        document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(correctguess+incorrectguess)) + "%";
+        document.getElementById("correct").innerHTML = "Correct: " + correctguess + "/" + totalguess;
+        document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(totalguess)) + "%";
+        drawImages();
     }
 
     function myTimer() {
