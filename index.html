@@ -16,7 +16,7 @@
     }
 
     #wrapper {
-        padding: 20px 50px 150px 50px;
+        padding: 20px 50px 30px 50px;
         margin: 30px 70px;
         border: 2px solid black;
     }
@@ -37,9 +37,10 @@
                 Images
             </td><td>
                 <input class="imgbutton" type="button" value="+">
+            </td><td id="empty">
             </td><td>
                 <input class="sizebutton" type="button" value="-">
-            </td><td>            
+            </td><td>
             </td><td>
                 Imagesize
             </td><td>
@@ -50,7 +51,7 @@
             </form>
             <br>
             <p id="img"></p>
-            <p id="clock">Time elapsed: </p>
+            <p id="clock">Time: </p>
             <p id="correct">Correct guesses: 0/0</p>
             <p id="ratio">Ratio: Nan</p>
         </div>
@@ -66,6 +67,9 @@
     const default_height = 150
     var imagecount = default_imagecount
     var height = default_height
+
+    // set space between buttons
+    $("#empty").width("15px")
     
     $('.imgbutton').click(function validateForm() {
         // image count buttons pressed
@@ -168,7 +172,7 @@
 
     function myTimer() {
         timepassed = timepassed + 1;
-        document.getElementById("clock").innerHTML = "Time elapsed: " + timepassed;
+        document.getElementById("clock").innerHTML = "Time: " + timepassed;
     }
 
     // TODO: fix this function to opt out of js-script data-loading
