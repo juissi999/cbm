@@ -73,9 +73,9 @@
         var type = $(this).attr("value")
         var newcount = imagecount
         if (type == "+") {
-            newcount += 1 
+            newcount += 1;
         } else {
-            newcount -= 1 
+            newcount -= 1;
         }
         
         if (newcount > 1 && newcount < 6) {
@@ -87,17 +87,18 @@
     $('.sizebutton').click(function validateForm() {
         // image size buttons pressed
 
-        var type = $(this).attr("value")
-        var newsize = height
+        var type = $(this).attr("value");
+        var newsize = height;
         if (type == "+") {
-            newsize += 10
+            newsize += 10;
         } else {
-            newsize -= 10
+            newsize -= 10;
         }
         
         if (newsize > 99 && newsize < 301) {
+            // this is made easy by jquery (updated)
             height = newsize;
-            drawImages();
+            $(".images").height(newsize);
         }
     });
 
@@ -133,7 +134,7 @@
                 if (i==happyrow && j==happycol) {
                     happyindex = Math.floor(Math.random() * numhappy);
                     img = url_happy[happyindex];
-                    imgel = $("<img height=" + height + " src='" + img + "'>"); //width=" + 0.75*height +"
+                    imgel = $("<img class=\"images\" height=" + height + " src='" + img + "'>"); //width=" + 0.75*height +"
                     imgel.click(function () {
                         processResult(true);
                     });
@@ -141,7 +142,7 @@
                 else {
                     unhappyindex = Math.floor(Math.random() * numunhappy)
                     img = url_unhappy[unhappyindex];
-                    imgel = $("<img height=" + height + "  src='" + img + "'>");
+                    imgel = $("<img class=\"images\" height=" + height + "  src='" + img + "'>");
                     imgel.click(function () {
                         processResult(false);
                     });
