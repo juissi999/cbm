@@ -100,11 +100,11 @@ var cbm = function (canvasid, $) {
       var imagepath = "";
       var happyindex, imtable, imgrow, img, imgel;
       $('#img').empty();
-      imtable = $('<table id="imtable"></table>');
+      imtable = $('<table id="imtable" align=center></table>');
       for (j = 0; j < imagecount; j++) {
          imgrow = $('<tr></tr>');
          for (i = 0; i < imagecount; i++) {
-               imgel = $("<td></td>");
+               imgel = $("<td align=center></td>");
                if (i==happyrow && j==happycol) {
                   happyindex = Math.floor(Math.random() * numhappy);
                   img = url_happy[happyindex];
