@@ -130,8 +130,9 @@
         var happycol = Math.floor(Math.random() * imagecount);
 
         var imagepath = "";
-        var happyindex, imgrow, img, imgel;
+        var happyindex, imtable, imgrow, img, imgel;
         $('#img').empty();
+        imtable = $('<table id="imtable"></table>');
         for (j = 0; j < imagecount; j++) {
             imgrow = $('<tr></tr>');
             for (i = 0; i < imagecount; i++) {
@@ -154,8 +155,9 @@
                 }
                 imgrow.append(imgel);
             }
-            $('#img').append(imgrow);
+            imtable.append(imgrow);
         }
+        $('#img').append(imtable);
     }
 
     function processResult(correct){
@@ -165,13 +167,15 @@
             correctguess = correctguess + 1;
             drawImages();
         } else {
-            alert("Incorrect!");
-            //$("body").css('background-color', 'red').delay(100);
-            //$(".images").css('opacity', 0.5);
+            //alert("Incorrect!");
+            $("#imtable").css('background-color', 'red');
+            $(".images").css('opacity', 0.5);
+            setTimeout(function () {
+                $(".images").css('opacity', 1);
+                $("#imtable").css('background-color', 'white');}, 500);
         }
         document.getElementById("correct").innerHTML = "Correct: " + correctguess + "/" + totalguess;
         document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(totalguess)) + "%";
-        //drawImages();
     }
 
     function myTimer() {
