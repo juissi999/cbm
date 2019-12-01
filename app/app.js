@@ -15,18 +15,19 @@ var cbm = function (canvasid, $) {
    // buttonrow html-strings
    var celements = [
       "<input class=\"imgbutton\" type=\"button\" value=\"-\"></input>",
+      "Images",
       "<input class=\"imgbutton\" type=\"button\" value=\"+\"></input>",
       "<div id=\"empty\"></div>",
       "<input class=\"sizebutton\" type=\"button\" value=\"-\"></input>",
+      "Imagesize",
       "<input class=\"sizebutton\" type=\"button\" value=\"+\"></input>",
    ];
 
    // append buttons for control row
    var celement = $();
-   for (i = 0; i < celement.length; i++) {
-      celement.empty();
+   for (i = 0; i < celements.length; i++) {
       celement = $('<td></td>');
-      celement.append();
+      celement.append(celements[i]);
       controlrow.append(celement);
    }
    $(canvasid).append(controlrow);
