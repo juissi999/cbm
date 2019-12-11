@@ -8,7 +8,7 @@ var cbm = function (canvasid, $) {
 
    // generate layout
    $(canvasid).empty();
-   $(canvasid).append("<div id=\"title\">Find a nice emotion.</div>");
+   $(canvasid).append("<h1>Find a nice emotion.</h1>");
    var imtable = $('<table id="imtable"></table>');
    var controlrow = $('<tr></tr>');
 
