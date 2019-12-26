@@ -1,2 +1,5 @@
 # Data resource file
 data.json
+
+# node modules
+node_modules/
