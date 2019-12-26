@@ -1,29 +1,23 @@
 // A build file for our project to minify css and javascript
 
-const {src, dest} = require("gulp");
+const gulp = require("gulp");
 const uglifycss = require("gulp-uglifycss");
 const minify = require('gulp-minify');
 
 const builddir = "./build/";
 
 
-function minifycss (cb) {
-   src("css/*.css")
+function minifycss () {
+   return gulp.src("css/*.css")
       .pipe(uglifycss({"uglyComments":true}))
-      .pipe(dest(builddir));
-   cb();
+      .pipe(gulp.dest(builddir));
 }
 
-function minifyjs (cb) {
-  src("app/*.js")
+function minifyjs () {
+   return gulp.src("app/*.js")
       .pipe(minify())
-      .pipe(dest(builddir));
-   cb();
+      .pipe(gulp.dest(builddir));
 }
 
-function defaulttask(cb) {
-   minifycss(cb);
-   minifyjs(cb);
-}
-
+const defaulttask = gulp.parallel(minifyjs, minifycss);
 exports.default = defaulttask;
