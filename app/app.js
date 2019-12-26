@@ -9,7 +9,6 @@ var cbm = function (canvasid, $) {
    // generate layout
    $(canvasid).empty();
    $(canvasid).append("<h1>Find a nice emotion.</h1>");
-   var imtable = $('<table id="imtable"></table>');
    var controlrow = $('<tr></tr>');
 
    // buttonrow html-strings
@@ -21,6 +20,8 @@ var cbm = function (canvasid, $) {
       "<input class=\"sizebutton\" type=\"button\" value=\"-\"></input>",
       "Imagesize",
       "<input class=\"sizebutton\" type=\"button\" value=\"+\"></input>",
+      "<div id=\"empty\"></div>",
+      "<input class=\"dmodebutton\" type=\"button\" value=\"D\"></input>",
    ];
 
    // append buttons for control row
@@ -39,6 +40,20 @@ var cbm = function (canvasid, $) {
 
    // set space between buttons
    $("#empty").width("15px");
+
+   var dmodeon = false;
+
+   $('.dmodebutton').click(function validateForm() {
+      if (dmodeon) {
+         $(".dmodebutton").val("L")
+         dmodeon = false;
+         $(canvasid).removeClass("darktheme");
+      } else {
+         $(".dmodebutton").val("D")
+         $(canvasid).addClass("darktheme");
+         dmodeon = true;
+      }
+   });
 
    $('.imgbutton').click(function validateForm() {
       // image count buttons pressed

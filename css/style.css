@@ -9,7 +9,7 @@ h1 {
    font-weight: normal;
 }
 
-.imgbutton, .sizebutton {
+input {
    font-size: 27px;
 }
 
@@ -17,4 +17,10 @@ h1 {
    padding: 20px 50px 30px 50px;
    margin: 30px 70px;
    border: 2px solid black;
+}
+
+.darktheme {
+   background-color: #333;
+   color: #fff;
+   fill: black;
 }

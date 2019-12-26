@@ -6,7 +6,6 @@ const minify = require('gulp-minify');
 
 const builddir = "./build/";
 
-
 function minifycss () {
    return gulp.src("css/*.css")
       .pipe(uglifycss({"uglyComments":true}))
@@ -19,5 +18,12 @@ function minifyjs () {
       .pipe(gulp.dest(builddir));
 }
 
+function watch_files() {
+   gulp.watch("app/*.js", minifyjs);
+   gulp.watch("css/*.css", minifycss);
+}
+
+
 const defaulttask = gulp.parallel(minifyjs, minifycss);
 exports.default = defaulttask;
+exports.watch = watch_files;
