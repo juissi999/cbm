@@ -156,7 +156,7 @@ var cbm = function (canvasid, $) {
          $(".images").css('opacity', 0.5);
          setTimeout(function () {
                $(".images").css('opacity', 1);
-               $("#imtable").css('background-color', 'white');}, 200);
+               $("#imtable").css('background-color', '');}, 200);
       }
       document.getElementById("correct").innerHTML = "Correct: " + correctguess + "/" + totalguess;
       document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(totalguess)) + "%";
