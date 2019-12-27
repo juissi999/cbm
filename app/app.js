@@ -8,6 +8,7 @@ var cbm = function (canvasid, $) {
 
    // generate layout
    $(canvasid).empty();
+   $(canvasid).addClass("wrapper_box");
    $(canvasid).append("<h1>Find a nice emotion.</h1>");
    var controlrow = $('<tr></tr>');
 
@@ -16,11 +17,11 @@ var cbm = function (canvasid, $) {
       "<input class=\"imgbutton\" type=\"button\" value=\"-\"></input>",
       "Images",
       "<input class=\"imgbutton\" type=\"button\" value=\"+\"></input>",
-      "<div id=\"empty\"></div>",
+      "<div class=\"button_divider\"></div>",
       "<input class=\"sizebutton\" type=\"button\" value=\"-\"></input>",
       "Imagesize",
       "<input class=\"sizebutton\" type=\"button\" value=\"+\"></input>",
-      "<div id=\"empty\"></div>",
+      "<div class=\"button_divider\"></div>",
       "<input class=\"dmodebutton\" type=\"button\" value=\"D\"></input>",
    ];
 
@@ -38,24 +39,23 @@ var cbm = function (canvasid, $) {
    $(canvasid).append("<p id=\"correct\">Correct guesses: 0/0</p>");
    $(canvasid).append("<p id=\"ratio\">Ratio: Nan</p>");
 
-   // set space between buttons
-   $("#empty").width("15px");
-
    var dmodeon = false;
 
-   $('.dmodebutton').click(function validateForm() {
+   $(".dmodebutton").click(function validateForm() {
       if (dmodeon) {
          $(".dmodebutton").val("L")
          dmodeon = false;
+         $("body").removeClass("darktheme");
          $(canvasid).removeClass("darktheme");
       } else {
          $(".dmodebutton").val("D")
+         $("body").addClass("darktheme");
          $(canvasid).addClass("darktheme");
          dmodeon = true;
       }
    });
 
-   $('.imgbutton').click(function validateForm() {
+   $(".imgbutton").click(function validateForm() {
       // image count buttons pressed
 
       var type = $(this).attr("value")
@@ -115,24 +115,25 @@ var cbm = function (canvasid, $) {
 
       var imagepath = "";
       var happyindex, imtable, imgrow, img, imgel;
-      $('#img').empty();
-      imtable = $('<table id="imtable" align=center></table>');
+      $("#img").empty();
+      imtable = $("<table id=\"imtable\"></table>");
       for (j = 0; j < imagecount; j++) {
-         imgrow = $('<tr></tr>');
+         imgrow = $("<tr></tr>");
          for (i = 0; i < imagecount; i++) {
-               imgel = $("<td align=center></td>");
                if (i==happyrow && j==happycol) {
+                  imgel = $("<td class=\"correct\"></td>");
                   happyindex = Math.floor(Math.random() * numhappy);
                   img = url_happy[happyindex];
-                  imgel.append("<img class=\"images\" height=" + height + " src='" + img + "'>"); //width=" + 0.75*height +"
+                  imgel.append("<img class=\"images\" height=" + height + " src=\"" + img + "\">"); //width=" + 0.75*height +"
                   imgel.click(function () {
                      processResult(true);
                   });
                }
                else {
+                  imgel = $("<td></td>");
                   unhappyindex = Math.floor(Math.random() * numunhappy);
                   img = url_unhappy[unhappyindex];
-                  imgel.append("<img class=\"images\" height=" + height + "  src='" + img + "'>");
+                  imgel.append("<img class=\"images\" height=" + height + "  src=\"" + img + "\">");
                   imgel.click(function () {
                      processResult(false);
                   });
@@ -149,17 +150,26 @@ var cbm = function (canvasid, $) {
 
       if (correct){
          correctguess = correctguess + 1;
-         drawImages();
+         $(".correct").addClass("image_table_correct");
+         $(".images").addClass("image_transparent");
+         setTimeout(image_clicked_callback, 200, true);
       } else {
          //alert("Incorrect!");
-         $("#imtable").css('background-color', 'red');
-         $(".images").css('opacity', 0.5);
-         setTimeout(function () {
-               $(".images").css('opacity', 1);
-               $("#imtable").css('background-color', '');}, 200);
+         $(".images").addClass("image_transparent");
+         $("#imtable").addClass("image_table_false");
+         setTimeout(image_clicked_callback, 200, false);
       }
       document.getElementById("correct").innerHTML = "Correct: " + correctguess + "/" + totalguess;
       document.getElementById("ratio").innerHTML = "Ratio: " + Math.round(correctguess*100/(totalguess)) + "%";
+   }
+
+   function image_clicked_callback(redraw) {
+      $(".images").removeClass("image_transparent");
+      $("#imtable").removeClass("image_table_false");
+      $("#imtable").removeClass("image_table_correct");
+      if (redraw){
+         drawImages();
+      }
    }
 
    function myTimer() {
