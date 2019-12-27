@@ -9,7 +9,7 @@ These kind of programs were not available so one had to be made. Here is a simpl
 website-program performing CBM with JavaScript.
 
 ## Demo
-https://juissi999.github.io/cbm/
+https://juissi999.github.io/cbm/build/
 
 ## What to do?
 Repeat the procedure of finding positive face.
