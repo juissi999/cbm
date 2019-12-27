@@ -18,8 +18,9 @@ table {
 }
 
 td, th {
-   padding:0px; 
+   padding:0px;
    margin:0px;
+   text-align: center;
 }
 
 .wrapper_box {
