@@ -23,6 +23,9 @@ Search scientifical articles for more detailed information.
 ## Using with custom images
 Download and run on web-browser. Currently you need to add urls of face-images
 manually to the code. In this version adding images requires you to add images
-to happy_images/ and unhappy_images folders. After that you need to add the image
-paths to data.json following the examples there. You can also use images from the
-internet by putting the whole URL to data.json.
+to happy_images/ and unhappy_images folders. After that you need to run 
+
+`python build_imagedata.py`
+
+to build javascript linker-file. You can also use images from the
+internet by putting the whole URL to imagedata.js.

@@ -20,7 +20,7 @@ data["url_happy"] = happyurls
 data["url_unhappy"] = unhappyurls
 
 # write it so that the variable name is on the file (easier to execute on js)
-with open("data.json", "w") as outfile:
+with open("app/imagedata.js", "w") as outfile:
    outfile.write("data = ")
    json.dump(data, outfile)
 
