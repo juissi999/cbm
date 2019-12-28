@@ -13,18 +13,44 @@ input {
    font-size: 27px;
 }
 
-table {
-   border-collapse: collapse;
+.center {
+   margin: auto;
+   width: 50%;
+   text-align: center;
+   line-height: 0;
 }
 
-td, th {
-   padding:0px;
-   margin:0px;
+.imagematrix2 {
+   display:grid;
+   grid-template-columns:repeat(2, 1fr);
+   justify-items: center;
+}
+
+.imagematrix3 {
+   display:grid;
+   grid-template-columns:repeat(3, 1fr);
+   justify-items: center;
+}
+
+.imagematrix4 {
+   display:grid;
+   grid-template-columns:repeat(4, 1fr);
+   justify-items: center;
+}
+
+.imagematrix5 {
+   display:grid;
+   grid-template-columns:repeat(5, 1fr);
+   justify-items: center;
+}
+
+.imgcontainer {
    text-align: center;
 }
 
 .wrapper_box {
-   padding: 20px 50px 30px 50px;
+   /* top | right | bottom | left */
+   padding: 20px 2px 30px 2px;
    margin: 30px 70px;
    border: 2px solid black;
 }
