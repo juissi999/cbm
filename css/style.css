@@ -52,7 +52,7 @@ table {
    background-color: green;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:800px) {
    .wrapper_box {
       padding:0;
       border:0;
