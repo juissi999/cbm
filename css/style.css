@@ -15,37 +15,8 @@ input {
 
 .center {
    margin: auto;
-   width: 50%;
-   text-align: center;
+
    line-height: 0;
-}
-
-.imagematrix2 {
-   display:grid;
-   grid-template-columns:repeat(2, 1fr);
-   justify-items: center;
-}
-
-.imagematrix3 {
-   display:grid;
-   grid-template-columns:repeat(3, 1fr);
-   justify-items: center;
-}
-
-.imagematrix4 {
-   display:grid;
-   grid-template-columns:repeat(4, 1fr);
-   justify-items: center;
-}
-
-.imagematrix5 {
-   display:grid;
-   grid-template-columns:repeat(5, 1fr);
-   justify-items: center;
-}
-
-.imgcontainer {
-   text-align: center;
 }
 
 .wrapper_box {
@@ -53,6 +24,10 @@ input {
    padding: 20px 2px 30px 2px;
    margin: 30px 70px;
    border: 2px solid black;
+}
+
+table {
+   text-align:center;
 }
 
 .button_divider {

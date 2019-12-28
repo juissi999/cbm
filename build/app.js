@@ -34,7 +34,7 @@ var cbm = function (canvasid, $) {
    }
    $(canvasid).append(controlrow);
 
-   $(canvasid).append("<div class=\"center\"><div id=\"imagearea\"></div></div>");
+   $(canvasid).append("<div class=\"center\"><div id=\"matrix\"></div></div>");
    $(canvasid).append("<div id=\"clock\">Time: </div>");
    $(canvasid).append("<div id=\"correct\">Correct guesses: 0/0</div>");
    $(canvasid).append("<div id=\"ratio\">Ratio: Nan</div>");
@@ -72,7 +72,7 @@ var cbm = function (canvasid, $) {
       }
    });
 
-   $(".sizebutton").click(function validateForm() {
+   $('.sizebutton').click(function validateForm() {
       // image size buttons pressed
 
       var type = $(this).attr("value");
@@ -110,33 +110,39 @@ var cbm = function (canvasid, $) {
       numhappy = url_happy.length;
       numunhappy = url_unhappy.length;
 
-      var happyindice = Math.floor(Math.random()*imagecount*imagecount);
+      var happyrow = Math.floor(Math.random() * imagecount);
+      var happycol = Math.floor(Math.random() * imagecount);
 
-      var happyindex, imtable, img, imgel;
-      $("#imagearea").empty();
-      imtable = $("<div class=\"imagematrix" + imagecount + "\"></div>");
-      for (i = 0; i < imagecount*imagecount; i++) {
-         if (i == happyindice) {
-            imgel = $("<div class=\"imgcontainer correct\"></div>");
-            happyindex = Math.floor(Math.random() * numhappy);
-            img = url_happy[happyindex];
-            imgel.append("<img class=\"images\" height=" + height + " src=\"" + img + "\">"); //width=" + 0.75*height +"
-            imgel.click(function () {
-               processResult(true);
-            });
+      var imagepath = "";
+      var happyindex, imtable, imgrow, img, imgel;
+      $("#matrix").empty();
+      imtable = $("<table id=\"imtable\"></table>");
+      for (j = 0; j < imagecount; j++) {
+         imgrow = $("<tr></tr>");
+         for (i = 0; i < imagecount; i++) {
+               if (i==happyrow && j==happycol) {
+                  imgel = $("<td class=\"correct\"></td>");
+                  happyindex = Math.floor(Math.random() * numhappy);
+                  img = url_happy[happyindex];
+                  imgel.append("<img class=\"images\" height=" + height + " src=\"" + img + "\">"); //width=" + 0.75*height +"
+                  imgel.click(function () {
+                     processResult(true);
+                  });
+               }
+               else {
+                  imgel = $("<td></td>");
+                  unhappyindex = Math.floor(Math.random() * numunhappy);
+                  img = url_unhappy[unhappyindex];
+                  imgel.append("<img class=\"images\" height=" + height + "  src=\"" + img + "\">");
+                  imgel.click(function () {
+                     processResult(false);
+                  });
+               }
+               imgrow.append(imgel);
          }
-         else {
-            imgel = $("<div class=\"imgcontainer\"></div>");
-            unhappyindex = Math.floor(Math.random() * numunhappy);
-            img = url_unhappy[unhappyindex];
-            imgel.append("<img class=\"images\" height=" + height + "  src=\"" + img + "\">");
-            imgel.click(function () {
-               processResult(false);
-            });
-         }
-         imtable.append(imgel);
+         imtable.append(imgrow);
       }
-      $("#imagearea").append(imtable);
+      $("#matrix").append(imtable);
    }
 
    function processResult(correct){
@@ -150,7 +156,7 @@ var cbm = function (canvasid, $) {
       } else {
          //alert("Incorrect!");
          $(".images").addClass("image_transparent");
-         $(".imagematrix").addClass("image_table_false");
+         $("#imtable").addClass("image_table_false");
          setTimeout(image_clicked_callback, 200, false);
       }
       document.getElementById("correct").innerHTML = "Correct: " + correctguess + "/" + totalguess;
@@ -159,7 +165,8 @@ var cbm = function (canvasid, $) {
 
    function image_clicked_callback(redraw) {
       $(".images").removeClass("image_transparent");
-      $(".imagematrix").removeClass("image_table_false");
+      $("#imtable").removeClass("image_table_false");
+      $("#imtable").removeClass("image_table_correct");
       if (redraw){
          drawImages();
       }
