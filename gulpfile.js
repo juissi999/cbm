@@ -2,7 +2,8 @@
 
 const gulp = require("gulp");
 const uglifycss = require("gulp-uglifycss");
-const minify = require('gulp-minify');
+const minify = require("gulp-minify");
+const concat = require("gulp-concat");
 const path = require("path")
 const del = require("del")
 
@@ -13,6 +14,7 @@ let happydir = "happy_images";
 
 function minifycss () {
    return gulp.src("css/*.css")
+      .pipe(concat("style.css"))
       .pipe(uglifycss({"uglyComments":true}))
       .pipe(gulp.dest(builddir));
 }
