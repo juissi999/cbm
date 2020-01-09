@@ -3,7 +3,7 @@ Some years ago I saw a documentary related to happiness, anxiety etc.
 In the program psychologists used a program to display multiple
 faces to participants. One of the faces was having a happy emotion
 and the others were unhappy. The task was to find the happy face among
-unhappy ones. This was called Cognitive Vias Modification.
+unhappy ones. This was called Cognitive Bias Modification.
 
 These kind of programs were not available so one had to be made. Here is a simple
 website-program performing CBM with JavaScript.
