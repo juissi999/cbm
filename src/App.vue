@@ -1,14 +1,23 @@
 <template>
-<div><HelloWorld /></div>
+  <div>
+    {{header}}
+    <ImageMatrix v-bind:images='imgs' />
+  </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import ImageMatrix from './components/ImageMatrix.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ImageMatrix
+  },
+  data() {
+    return {
+      header:'CBM',
+      imgs:['sad', 'sad', 'happy']}
   }
 }
 </script>
