@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
 import ImageMatrix from './components/ImageMatrix.vue'
+import images from './imagedata.json'
 
 export default {
   name: 'App',
@@ -17,7 +18,8 @@ export default {
   data() {
     return {
       header:'CBM',
-      imgs:['sad', 'sad', 'happy']}
+      imgs:images}
+      //imgs:['sad', 'sad', 'happy']}
   }
 }
 </script>
