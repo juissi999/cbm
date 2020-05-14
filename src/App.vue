@@ -1,25 +1,31 @@
 <template>
   <div>
-    {{header}}
-    <ImageMatrix v-bind:images='imgs' />
+    {{ header }}
+    <ControlBar />
+    <ImageMatrix />
+    <ResultBar />
   </div>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
 import ImageMatrix from './components/ImageMatrix.vue'
-import images from './imagedata.json'
+import ControlBar from './components/ControlBar.vue'
+import ResultBar from './components/ResultBar.vue'
+
+const DEFAULT_IMAGECOUNT = 4
+const DEFAULT_HEIGHT = 150
 
 export default {
   name: 'App',
   components: {
-    ImageMatrix
+    ImageMatrix,
+    ControlBar,
+    ResultBar
   },
   data() {
     return {
-      header:'CBM',
-      imgs:images}
-      //imgs:['sad', 'sad', 'happy']}
+      header: 'CBM'
+    }
   }
 }
 </script>
