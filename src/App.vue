@@ -7,7 +7,7 @@
       v-on:update-height="updateHeight"
       v-on:update-count="updateCount"
     />
-    <ImageMatrix :height="height" />
+    <ImageMatrix :height="height" :count="count" />
     <ResultBar />
   </div>
 </template>

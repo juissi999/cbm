@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div v-bind:key="i" v-for="(image, i) in happy">
-      <img :src="image.default" />
+    <div v-bind:key="n" v-for="n in count">
+      <span v-bind:key="j" v-for="j in count">
+        <img :src="happy[0].default" :height="height" />
+      </span>
     </div>
   </div>
 </template>
@@ -19,16 +21,14 @@ const unhappyImages = importAll(
   require.context('../unhappy_images/', false, /\.(png|jpe?g|svg)$/)
 )
 
-console.log(happyImages.length)
-
 export default {
   beforeCreate() {},
   name: 'ImageMatrix',
-  props: ['images'],
+  props: ['count', 'height'],
   data: () => {
     return {
-      unhappy: happyImages,
-      happy: unhappyImages
+      happy: happyImages,
+      unhappy: unhappyImages
     }
   }
 }
