@@ -2,7 +2,7 @@
   <div>
     <div v-bind:key="n" v-for="n in count">
       <span v-bind:key="j" v-for="j in count">
-        <img :src="happy[0].default" :height="height" />
+        <img :src="happy[0].default" :height="height" v-on:click="onClick" />
       </span>
     </div>
   </div>
@@ -22,13 +22,24 @@ const unhappyImages = importAll(
 )
 
 export default {
-  beforeCreate() {},
+  beforeMount() {
+    this.randlocation()
+  },
   name: 'ImageMatrix',
   props: ['count', 'height'],
   data: () => {
     return {
       happy: happyImages,
-      unhappy: unhappyImages
+      unhappy: unhappyImages,
+      happyIndex: 0
+    }
+  },
+  methods: {
+    onClick() {
+      this.randlocation()
+    },
+    randlocation() {
+      this.happyIndex = Math.floor(Math.random() * this.count ** 2)
     }
   }
 }
