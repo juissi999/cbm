@@ -13,13 +13,12 @@
     "vue-loader": "^15.9.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "watch": "webpack-dev-server"
+    "watch": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
