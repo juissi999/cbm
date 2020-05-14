@@ -2,10 +2,12 @@
   <div>
     {{ header }}
     <ControlBar
-      v-bind:count="DEFAULT_IMAGECOUNT"
-      v-bind:imgsize="DEFAULT_HEIGHT"
+      v-bind:count="count"
+      v-bind:imgsize="height"
+      v-on:update-height="updateHeight"
+      v-on:update-count="updateCount"
     />
-    <ImageMatrix />
+    <ImageMatrix :height="height" />
     <ResultBar />
   </div>
 </template>
@@ -25,8 +27,16 @@ export default {
   data() {
     return {
       header: 'CBM',
-      DEFAULT_IMAGECOUNT: 4,
-      DEFAULT_HEIGHT: 150
+      count: 4,
+      height: 150
+    }
+  },
+  methods: {
+    updateHeight(newHeight) {
+      this.height = newHeight
+    },
+    updateCount(newCount) {
+      this.count = newCount
     }
   }
 }
