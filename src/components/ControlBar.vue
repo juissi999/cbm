@@ -12,9 +12,9 @@
 <script>
 export default {
   name: 'ControlBar',
-  props: [],
+  props: ['count', 'imgsize'],
   data() {
-    return { images: 0, size: 100 }
+    return { images: this.count, size: this.imgsize }
   }
 }
 </script>

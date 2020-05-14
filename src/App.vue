@@ -1,7 +1,10 @@
 <template>
   <div>
     {{ header }}
-    <ControlBar />
+    <ControlBar
+      v-bind:count="DEFAULT_IMAGECOUNT"
+      v-bind:imgsize="DEFAULT_HEIGHT"
+    />
     <ImageMatrix />
     <ResultBar />
   </div>
@@ -12,9 +15,6 @@ import ImageMatrix from './components/ImageMatrix.vue'
 import ControlBar from './components/ControlBar.vue'
 import ResultBar from './components/ResultBar.vue'
 
-const DEFAULT_IMAGECOUNT = 4
-const DEFAULT_HEIGHT = 150
-
 export default {
   name: 'App',
   components: {
@@ -24,7 +24,9 @@ export default {
   },
   data() {
     return {
-      header: 'CBM'
+      header: 'CBM',
+      DEFAULT_IMAGECOUNT: 4,
+      DEFAULT_HEIGHT: 150
     }
   }
 }
