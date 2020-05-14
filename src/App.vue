@@ -33,10 +33,14 @@ export default {
   },
   methods: {
     updateHeight(newHeight) {
-      this.height = newHeight
+      if (newHeight > 0 && newHeight < 250) {
+        this.height = newHeight
+      }
     },
     updateCount(newCount) {
-      this.count = newCount
+      if (newCount > 0 && newCount < 8) {
+        this.count = newCount
+      }
     }
   }
 }
