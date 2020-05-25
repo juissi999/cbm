@@ -2,7 +2,18 @@
   <div>
     <div v-bind:key="n" v-for="n in count">
       <span v-bind:key="j" v-for="j in count">
-        <img :src="happy[0].default" :height="height" v-on:click="onClick" />
+        <img
+          v-if="happyRow === n && happyCol == j"
+          :src="happy[0].default"
+          :height="height"
+          v-on:click="onClick"
+        />
+        <img
+          v-else
+          :src="unhappy[0].default"
+          :height="height"
+          v-on:click="onClick"
+        />
       </span>
     </div>
   </div>
@@ -22,7 +33,7 @@ const unhappyImages = importAll(
 )
 
 export default {
-  beforeMount() {
+  beforeMount () {
     this.randlocation()
   },
   name: 'ImageMatrix',
@@ -31,15 +42,17 @@ export default {
     return {
       happy: happyImages,
       unhappy: unhappyImages,
-      happyIndex: 0
+      happyRow: 0,
+      happyCol: 0
     }
   },
   methods: {
-    onClick() {
+    onClick () {
       this.randlocation()
     },
-    randlocation() {
-      this.happyIndex = Math.floor(Math.random() * this.count ** 2)
+    randlocation () {
+      this.happyRow = Math.ceil(Math.random() * this.count)
+      this.happyCol = Math.ceil(Math.random() * this.count)
     }
   }
 }
