@@ -1,0 +1,34 @@
+{
+  "name": "cbm",
+  "version": "0.1.0",
+  "description": "A cognition bias modification web app",
+  "main": "docs/index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "jquery": "^3.5.1",
+    "style-loader": "^1.2.1",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "watch": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juissi999/cbm.git"
+  },
+  "author": "juissi999",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juissi999/cbm/issues"
+  },
+  "homepage": "https://github.com/juissi999/cbm#readme"
+}
