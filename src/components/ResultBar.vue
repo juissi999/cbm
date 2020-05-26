@@ -1,13 +1,11 @@
 <template>
-  <div>
-    resultbar
-  </div>
+  <div>Results: {{ correct }} / {{ guesses }}</div>
 </template>
 
 <script>
 export default {
   name: 'ResultBar',
-  props: []
+  props: ['guesses', 'correct']
 }
 </script>
 

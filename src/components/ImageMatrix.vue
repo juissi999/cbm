@@ -6,13 +6,13 @@
           v-if="happyRow === n && happyCol == j"
           :src="happy[0].default"
           :height="height"
-          v-on:click="onClick"
+          v-on:click="onClick(true)"
         />
         <img
           v-else
           :src="unhappy[0].default"
           :height="height"
-          v-on:click="onClick"
+          v-on:click="onClick(false)"
         />
       </span>
     </div>
@@ -47,7 +47,8 @@ export default {
     }
   },
   methods: {
-    onClick () {
+    onClick (correct) {
+      this.$emit('send-guess', correct)
       this.randlocation()
     },
     randlocation () {

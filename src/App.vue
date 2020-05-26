@@ -7,8 +7,12 @@
       v-on:update-height="updateHeight"
       v-on:update-count="updateCount"
     />
-    <ImageMatrix :height="height" :count="count" />
-    <ResultBar />
+    <ImageMatrix
+      v-on:send-guess="updateResult"
+      :height="height"
+      :count="count"
+    />
+    <ResultBar :guesses="guesses" :correct="correctGuesses" />
   </div>
 </template>
 
@@ -24,23 +28,31 @@ export default {
     ControlBar,
     ResultBar
   },
-  data() {
+  data () {
     return {
       header: 'CBM',
       count: 4,
-      height: 150
+      height: 150,
+      guesses: 0,
+      correctGuesses: 0
     }
   },
   methods: {
-    updateHeight(newHeight) {
+    updateHeight (newHeight) {
       if (newHeight > 0 && newHeight < 250) {
         this.height = newHeight
       }
     },
-    updateCount(newCount) {
+    updateCount (newCount) {
       if (newCount > 0 && newCount < 8) {
         this.count = newCount
       }
+    },
+    updateResult (correct) {
+      if (correct) {
+        this.correctGuesses += 1
+      }
+      this.guesses += 1
     }
   }
 }
