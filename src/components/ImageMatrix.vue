@@ -4,13 +4,13 @@
       <span v-bind:key="j" v-for="j in count">
         <img
           v-if="happyRow === n && happyCol == j"
-          :src="happy[0].default"
+          :src="randFromList(happy).default"
           :height="height"
           v-on:click="onClick(true)"
         />
         <img
           v-else
-          :src="unhappy[0].default"
+          :src="randFromList(unhappy).default"
           :height="height"
           v-on:click="onClick(false)"
         />
@@ -54,6 +54,10 @@ export default {
     randlocation () {
       this.happyRow = Math.ceil(Math.random() * this.count)
       this.happyCol = Math.ceil(Math.random() * this.count)
+    },
+    randFromList (itemList) {
+      const randIndex = Math.floor(Math.random() * itemList.length)
+      return itemList[randIndex]
     }
   }
 }
