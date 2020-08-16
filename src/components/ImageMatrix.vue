@@ -26,10 +26,10 @@ const importAll = r => {
 }
 
 const happyImages = importAll(
-  require.context('../happy_images/', false, /\.(png|jpe?g|svg)$/)
+  require.context('../assets/happy_images/', false, /\.(png|jpe?g|svg)$/)
 )
 const unhappyImages = importAll(
-  require.context('../unhappy_images/', false, /\.(png|jpe?g|svg)$/)
+  require.context('../assets/unhappy_images/', false, /\.(png|jpe?g|svg)$/)
 )
 
 export default {

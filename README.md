@@ -40,11 +40,11 @@ The site is build to folder docs/.
 
 See installation first. After npm install add happy images to folder
 
-    src/happy_images
+    src/assets/happy_images
 
 add unhappy images to
 
-    src/unhappy_images
+    src/assets/unhappy_images
 
 build site by typing to terminal
 
