@@ -1,27 +1,38 @@
 <template>
   <div class="container">
-    <template v-for="n in count">
-      <hide-at :key="n" breakpoint="small">
-        <div>
-          <div v-for="j in count" :key="j">
+    <div v-bind:key="c" v-for="c in count">
+      <div v-bind:key="r" v-for="r in count">
+        <template v-if="showColumns.find(cols => cols === c)">
+          <img
+            :src="
+              happyRow === r && happyCol === c
+                ? randFromList(happy).default
+                : randFromList(unhappy).default
+            "
+            :height="height"
+            v-on:click="onClick(happyRow === r && happyCol === c)"
+          />
+        </template>
+        <template v-else>
+          <show-at breakpoint="mediumAndAbove">
             <img
               :src="
-                happyRow === n && happyCol == j
+                happyRow === r && happyCol === c
                   ? randFromList(happy).default
                   : randFromList(unhappy).default
               "
               :height="height"
-              v-on:click="onClick(happyRow === n && happyCol == j)"
+              v-on:click="onClick(happyRow === r && happyCol === c)"
             />
-          </div>
-        </div>
-      </hide-at>
-    </template>
+          </show-at>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { hideAt } from 'vue-breakpoints'
+import { showAt } from 'vue-breakpoints'
 
 // TODO: check out the requires to be more "clear"
 const importAll = r => {
@@ -40,7 +51,7 @@ export default {
     this.randlocation()
   },
   name: 'ImageMatrix',
-  components: { hideAt },
+  components: { showAt },
   props: ['count', 'height'],
   data: () => {
     return {
@@ -62,6 +73,16 @@ export default {
     randFromList (itemList) {
       const randIndex = Math.floor(Math.random() * itemList.length)
       return itemList[randIndex]
+    }
+  },
+  computed: {
+    showColumns: function () {
+      console.log(this.happyCol, this.happyCol === 1)
+      if (this.happyCol === 1) {
+        return [1, 2]
+      } else {
+        return [1, this.happyCol]
+      }
     }
   }
 }
