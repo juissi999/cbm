@@ -1,25 +1,31 @@
 <template>
-  <div>
-    <div v-bind:key="n" v-for="n in count">
-      <span v-bind:key="j" v-for="j in count">
-        <img
-          v-if="happyRow === n && happyCol == j"
-          :src="randFromList(happy).default"
-          :height="height"
-          v-on:click="onClick(true)"
-        />
-        <img
-          v-else
-          :src="randFromList(unhappy).default"
-          :height="height"
-          v-on:click="onClick(false)"
-        />
-      </span>
-    </div>
+  <div class="container">
+    <template v-for="n in count">
+      <hide-at :key="n" breakpoint="small">
+        <div>
+          <div v-for="j in count" :key="j">
+            <img
+              v-if="happyRow === n && happyCol == j"
+              :src="randFromList(happy).default"
+              :height="height"
+              v-on:click="onClick(true)"
+            />
+            <img
+              v-else
+              :src="randFromList(unhappy).default"
+              :height="height"
+              v-on:click="onClick(false)"
+            />
+          </div>
+        </div>
+      </hide-at>
+    </template>
   </div>
 </template>
 
 <script>
+import { hideAt } from 'vue-breakpoints'
+
 // TODO: check out the requires to be more "clear"
 const importAll = r => {
   return r.keys().map(r)
@@ -37,6 +43,7 @@ export default {
     this.randlocation()
   },
   name: 'ImageMatrix',
+  components: { hideAt },
   props: ['count', 'height'],
   data: () => {
     return {
@@ -63,4 +70,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+}
+</style>
