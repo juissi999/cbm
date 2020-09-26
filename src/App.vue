@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>
+    <h1 class="container">
       {{ header }}
     </h1>
     <ControlBar
@@ -60,4 +60,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+}
+</style>

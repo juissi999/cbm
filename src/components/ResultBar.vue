@@ -1,5 +1,5 @@
 <template>
-  <div>Results: {{ correct }} / {{ guesses }}</div>
+  <div class="container">Results: {{ correct }} / {{ guesses }}</div>
 </template>
 
 <script>
@@ -8,5 +8,3 @@ export default {
   props: ['guesses', 'correct']
 }
 </script>
-
-<style scoped></style>
