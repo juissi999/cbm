@@ -5,16 +5,13 @@
         <div>
           <div v-for="j in count" :key="j">
             <img
-              v-if="happyRow === n && happyCol == j"
-              :src="randFromList(happy).default"
+              :src="
+                happyRow === n && happyCol == j
+                  ? randFromList(happy).default
+                  : randFromList(unhappy).default
+              "
               :height="height"
-              v-on:click="onClick(true)"
-            />
-            <img
-              v-else
-              :src="randFromList(unhappy).default"
-              :height="height"
-              v-on:click="onClick(false)"
+              v-on:click="onClick(happyRow === n && happyCol == j)"
             />
           </div>
         </div>
