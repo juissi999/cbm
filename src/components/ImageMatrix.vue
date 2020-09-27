@@ -1,29 +1,13 @@
 <template>
   <div class="container">
-    <div v-bind:key="c" v-for="c in count">
-      <div v-bind:key="r" v-for="r in count">
-        <template v-if="showColumns.find(cols => cols === c)">
-          <img
-            :src="
-              happyRow === r && happyCol === c
-                ? randFromList(happy).default
-                : randFromList(unhappy).default
-            "
-            :height="height"
-            v-on:click="onClick(happyRow === r && happyCol === c)"
-          />
+    <div v-bind:key="cind" v-for="(c, cind) in imgMatrix">
+      <div v-bind:key="rind" v-for="(r, rind) in c">
+        <template v-if="showColumns.includes(cind)">
+          <img :src="r.path" :height="height" v-on:click="onClick(r.happy)" />
         </template>
         <template v-else>
           <show-at breakpoint="mediumAndAbove">
-            <img
-              :src="
-                happyRow === r && happyCol === c
-                  ? randFromList(happy).default
-                  : randFromList(unhappy).default
-              "
-              :height="height"
-              v-on:click="onClick(happyRow === r && happyCol === c)"
-            />
+            <img :src="r.path" :height="height" v-on:click="onClick(r.happy)" />
           </show-at>
         </template>
       </div>
@@ -67,8 +51,8 @@ export default {
       this.randlocation()
     },
     randlocation () {
-      this.happyRow = Math.ceil(Math.random() * this.count)
-      this.happyCol = Math.ceil(Math.random() * this.count)
+      this.happyRow = Math.floor(Math.random() * this.count)
+      this.happyCol = Math.floor(Math.random() * this.count)
     },
     randFromList (itemList) {
       const randIndex = Math.floor(Math.random() * itemList.length)
@@ -77,12 +61,27 @@ export default {
   },
   computed: {
     showColumns: function () {
-      console.log(this.happyCol, this.happyCol === 1)
-      if (this.happyCol === 1) {
-        return [1, 2]
+      if (this.happyCol === 0) {
+        return [0, 1]
       } else {
-        return [1, this.happyCol]
+        return [0, this.happyCol]
       }
+    },
+    imgMatrix: function () {
+      const columns = Array(this.count).fill(0)
+      const filledColumns = columns.map((empty, c) => {
+        const rows = Array(this.count).fill(0)
+        return rows.map((empty2, r) => {
+          return {
+            path:
+              this.happyRow === r && this.happyCol === c
+                ? this.randFromList(this.happy).default
+                : this.randFromList(this.unhappy).default,
+            happy: this.happyRow === r && this.happyCol === c
+          }
+        })
+      })
+      return filledColumns
     }
   }
 }
