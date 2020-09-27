@@ -1,22 +1,21 @@
 <template>
   <div class="container">
-    <div v-bind:key="cind" v-for="(c, cind) in imgMatrix">
-      <div v-bind:key="rind" v-for="(r, rind) in c">
-        <template v-if="showColumns.includes(cind)">
-          <img :src="r.path" :height="height" v-on:click="onClick(r.happy)" />
-        </template>
-        <template v-else>
-          <show-at breakpoint="mediumAndAbove">
-            <img :src="r.path" :height="height" v-on:click="onClick(r.happy)" />
-          </show-at>
-        </template>
-      </div>
+    <div v-bind:key="cind" v-for="(col, cind) in imgMatrix">
+      <template v-if="showColumns.includes(cind)">
+        <image-column :images="col" :height="height" />
+      </template>
+      <template v-else>
+        <show-at breakpoint="mediumAndAbove">
+          <image-column :images="col" :height="height" />
+        </show-at>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
 import { showAt } from 'vue-breakpoints'
+import imageColumn from './ImageColumn.vue'
 
 // TODO: check out the requires to be more "clear"
 const importAll = r => {
@@ -35,7 +34,7 @@ export default {
     this.randlocation()
   },
   name: 'ImageMatrix',
-  components: { showAt },
+  components: { showAt, imageColumn },
   props: ['count', 'height'],
   data: () => {
     return {
@@ -46,8 +45,12 @@ export default {
     }
   },
   methods: {
-    onClick (correct) {
-      this.$emit('send-guess', correct)
+    onHappyClick () {
+      this.$emit('send-guess', true)
+      this.randlocation()
+    },
+    onUnhappyClick () {
+      this.$emit('send-guess', false)
       this.randlocation()
     },
     randlocation () {
@@ -77,7 +80,10 @@ export default {
               this.happyRow === r && this.happyCol === c
                 ? this.randFromList(this.happy).default
                 : this.randFromList(this.unhappy).default,
-            happy: this.happyRow === r && this.happyCol === c
+            callback:
+              this.happyRow === r && this.happyCol === c
+                ? this.onHappyClick
+                : this.onUnhappyClick
           }
         })
       })
