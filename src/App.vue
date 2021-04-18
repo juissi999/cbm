@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <h1 class="container">
+  <div class="container">
+    <h1 class="text-center">
       {{ header }}
     </h1>
     <ControlBar
+    class="my-3"
       v-bind:count="count"
       v-bind:imgsize="height"
       v-on:update-height="updateHeight"
@@ -14,7 +15,7 @@
       :height="height"
       :count="count"
     />
-    <ResultBar :guesses="guesses" :correct="correctGuesses" />
+    <ResultBar class="my-3 text-center" :guesses="guesses" :correct="correctGuesses" />
   </div>
 </template>
 
@@ -59,10 +60,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container {
-  display: flex;
-  justify-content: center;
-}
-</style>

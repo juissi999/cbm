@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(img, i) in images" :key="i">
-      <img :src="img.path" :height="height" v-on:click="img.callback" />
+      <img class=" ma-1 pa-1 pointer" :src="img.path" :height="height" v-on:click="img.callback" />
     </div>
   </div>
 </template>

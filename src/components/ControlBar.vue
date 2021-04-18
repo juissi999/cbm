@@ -1,11 +1,15 @@
 <template>
-  <div class="container">
-    <button v-on:click="$emit('update-count', count - 1)">-</button>
+  <div class="row wrap justify-content-center">
+    <div class="mx-4">
+    <button class="jred pointer" v-on:click="$emit('update-count', count - 1)">-</button>
     Images: {{ count }}
-    <button v-on:click="$emit('update-count', count + 1)">+</button>
-    <button v-on:click="$emit('update-height', imgsize - heightStep)">-</button>
+    <button class="jgreen pointer" v-on:click="$emit('update-count', count + 1)">+</button>
+    </div>
+    <div class="mx-4">
+    <button class="jred pointer" v-on:click="$emit('update-height', imgsize - heightStep)">-</button>
     Imagesize: {{ imgsize }}
-    <button v-on:click="$emit('update-height', imgsize + heightStep)">+</button>
+    <button class="jgreen pointer" v-on:click="$emit('update-height', imgsize + heightStep)">+</button>
+    </div>
   </div>
 </template>
 
@@ -18,5 +22,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

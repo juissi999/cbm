@@ -1,5 +1,5 @@
 <template>
-  <div class="container">Results: {{ correct }} / {{ guesses }}</div>
+  <h3 class="text-jblue">Results: {{ correct }} / {{ guesses }}</h3>
 </template>
 
 <script>

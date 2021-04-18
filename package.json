@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/juissi999/cbm/issues"
   },
-  "homepage": "https://github.com/juissi999/cbm#readme"
+  "homepage": "https://github.com/juissi999/cbm#readme",
+  "dependencies": {
+    "juicycss": "0.0.8"
+  }
 }

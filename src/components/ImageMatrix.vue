@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="row justify-content-center">
     <div v-bind:key="cind" v-for="(col, cind) in imgMatrix">
       <template v-if="showColumns.includes(cind)">
         <image-column :images="col" :height="height" />
