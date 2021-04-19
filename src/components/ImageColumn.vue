@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div v-for="(img, i) in images" :key="i">
-      <img class=" ma-1 pa-1 pointer" :src="img.path" :height="height" v-on:click="img.callback" />
-    </div>
+    <template v-for="(img, i) in images" >
+      <Img :img="img" :height="height" :key="i"/>
+    </template>
   </div>
 </template>
 
 <script>
+import Img from './Img.vue'
+
 export default {
   name: 'ImageColumn',
+  components: { Img },
   props: ['images', 'height']
 }
 </script>

@@ -76,6 +76,7 @@ export default {
         const rows = Array(this.count).fill(0)
         return rows.map((empty2, r) => {
           return {
+            happy: this.happyRow === r && this.happyCol === c,
             path:
               this.happyRow === r && this.happyCol === c
                 ? this.randFromList(this.happy).default
