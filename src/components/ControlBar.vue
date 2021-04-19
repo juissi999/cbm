@@ -18,7 +18,7 @@ export default {
   name: 'ControlBar',
   props: ['count', 'imgsize'],
   data () {
-    return { heightStep: 5 }
+    return { heightStep: 10 }
   }
 }
 </script>

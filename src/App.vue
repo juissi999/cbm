@@ -47,7 +47,7 @@ export default {
       }
     },
     updateCount (newCount) {
-      if (newCount > 0 && newCount < 8) {
+      if (newCount > 1 && newCount < 8) {
         this.count = newCount
       }
     },
